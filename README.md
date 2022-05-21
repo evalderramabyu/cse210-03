@@ -1,6 +1,7 @@
 # cse210-03  -  Jumper
 
 > There are old skydivers and bold skydivers, but there are no old, bold skydivers.
+>
 > \- Jeff Wuorio -
 
 ## Overview
