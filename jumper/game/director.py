@@ -57,25 +57,6 @@ class Director:
             self._get_inputs()
             self._do_updates()
 
-
-            #self._found_letter = self._secret_word.check_letter(
-            #    word, input(letter), lines)
-            #self._secret_word.display_progress(lines)
-#
-            #if self._found_letter == 'no':
-            #    self._no_found_letter += 1
-#
-            #is_found = self._secret_word.if_found(lines)
-#
-            #if is_found == 'yes':
-            #    print('You win')
-            #    break
-            #elif self._no_found_letter == 4:
-            #    print('You lose')
-            #    break
-            #else:
-            #    continue
-
     def _get_inputs(self):
         """Get a letter from the player.
 
