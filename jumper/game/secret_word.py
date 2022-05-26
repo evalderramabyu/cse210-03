@@ -14,10 +14,9 @@ class SecretWord:
         self._letter = ''
         self._word_letters = []
         self._word_level = ''
-        self._lines = []
         self._terminal_service = TerminalService()
 
-    def basic_level(self):
+    def _basic_level(self):
         """
             Select a random basic word
 
@@ -33,7 +32,7 @@ class SecretWord:
         self._word = random.choice(list_words)
         return self._word
 
-    def intermediate_level(self):
+    def _intermediate_level(self):
         """
             Select a random intermediate word
 
@@ -49,7 +48,7 @@ class SecretWord:
         self._word = random.choice(list_words)
         return self._word
 
-    def advanced_level(self):
+    def _advanced_level(self):
         """
             Select a random advanced word
 
@@ -65,7 +64,7 @@ class SecretWord:
         self._word = random.choice(list_words)
         return self._word
 
-    def empty_word(self, number):
+    def _empty_word(self, number):
         """
             Create lines depending the number of letter in the random word
 
@@ -100,19 +99,19 @@ class SecretWord:
         if self._word_level == 1:
             self._terminal_service.write_text(
                 'This is your lucky day, your word is very easy to guess 👏')
-            self._word = self.basic_level()
+            self._word = self._basic_level()
 
         elif self._word_level == 2:
             self._terminal_service.write_text(
                 'You can guess this work, only think a little bit 👍')
-            self._word = self.intermediate_level()
+            self._word = self._intermediate_level()
 
         else:
             self._terminal_service.write_text(
                 'This word is very difficult. Do you really think you can guess it? 😏')
-            self._word = self.advanced_level()
+            self._word = self._advanced_level()
 
-        self._word_letters = self.empty_word(len(self._word))
+        self._word_letters = self._empty_word(len(self._word))
 
         return self._word, self._word_letters
 
