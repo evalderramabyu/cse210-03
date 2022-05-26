@@ -49,7 +49,7 @@ class Director:
 
         #Generate the secret word
         self._secret_word.input_word(self._terminal_service)
-        print(self._secret_word.get_word())
+        # print(self._secret_word.get_word())
         # print(self._secret_word.get_word_letters())
 
         while self._is_playing:
