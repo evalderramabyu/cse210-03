@@ -10,8 +10,10 @@ class SecretWord:
             self (Jumper): An instance of Jumper.
         """
         self._word = ''
+        self._letter = ''
         self._word_letters = []
         self._word_level = ''
+        self._lines = []
 
     def basic_level(self):
         """
@@ -61,6 +63,22 @@ class SecretWord:
         self._word = random.choice(list_words)
         return self._word
 
+    def empty_word(self, number):
+        """
+            Create lines depending the number of letter in the random word
+
+            Args:
+                self (SecretWord): An instance of SecretWord.
+
+            Returns: 
+                self._word_letters: The word like lines
+
+        """
+
+        for i in range(number):
+            self._word_letters.append('_')
+        return self._word_letters
+
     def input_word(self):
         """
             Select a random 
@@ -89,13 +107,27 @@ class SecretWord:
             print('This word is very difficult. Do you really think you can guess it? 😏')
             self._word = self.advanced_level()
 
-        return self._word
+        self._word_letters = self.empty_word(len(self._word))
 
-    def check_letter(self):
-        pass
+        return self._word, self._word_letters
 
-    def if_found(self):
-        pass
+    def check_letter(self, random_word, selected_letter, lines):
+        found_letter = 'no'
+        for i in range(len(random_word)):
+            if random_word[i] == selected_letter:
+                lines[i] = selected_letter
+                found_letter = 'yes'
+        return found_letter
 
-    def display_progress(self):
-        pass
+    def if_found(self, lines):
+        found = 'yes'
+        for i in range(len(lines)):
+            if lines[i] == '_':
+                found = 'no'
+        return found
+
+    def display_progress(self, lines):
+        print('⚕️', end=' ')
+        for i in range(len(lines)):
+            print(f' {lines[i]}', end=' ')
+        print('\n❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️\n')
