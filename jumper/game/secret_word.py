@@ -1,3 +1,4 @@
+from game.terminal_service import TerminalService
 import random
 
 
@@ -14,6 +15,7 @@ class SecretWord:
         self._word_letters = []
         self._word_level = ''
         self._lines = []
+        self._terminal_service = TerminalService()
 
     def basic_level(self):
         """
@@ -96,15 +98,18 @@ class SecretWord:
         self._word_level = random.randint(1, 3)
 
         if self._word_level == 1:
-            print('This is your lucky day, your word is very easy to guess 👏')
+            self._terminal_service.write_text(
+                'This is your lucky day, your word is very easy to guess 👏')
             self._word = self.basic_level()
 
         elif self._word_level == 2:
-            print('You can guess this work, only think a little bit 👍')
+            self._terminal_service.write_text(
+                'You can guess this work, only think a little bit 👍')
             self._word = self.intermediate_level()
 
         else:
-            print('This word is very difficult. Do you really think you can guess it? 😏')
+            self._terminal_service.write_text(
+                'This word is very difficult. Do you really think you can guess it? 😏')
             self._word = self.advanced_level()
 
         self._word_letters = self.empty_word(len(self._word))
