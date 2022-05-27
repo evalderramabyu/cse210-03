@@ -128,6 +128,7 @@ class SecretWord:
 
         self._word = secret_word[0]
         self._word_letters = list(secret_word[0])
+        #prints rules and hints
         print(f"This emoji is your hint: {secret_word[1]}")
         print(f"The word has {len(secret_word[0])} letters")
         print("You have 4 lives")
