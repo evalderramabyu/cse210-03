@@ -98,7 +98,7 @@ class SecretWord:
 
     def input_word(self, terminal_service):
         """
-            Select a random
+            Select a random word from the arrays 
 
             Args:
                 self (SecretWord): An instance of SecretWord.
@@ -133,9 +133,15 @@ class SecretWord:
         terminal_service.write_text("You have 4 lives")
 
     def check_letter(self, letter):
+        """ Confirms the input letter is part of the word
+        """
         return letter in self._word_letters
 
     def is_found(self, guessed_letters):
+        """Sorts and creates a list of the letters guessed by the user. If there is one or more of the same letter, it returns only 1 of them. 
+            Sorts and creates a list of the letters that are part of the secret word. If there is one or more of the same letter, it returns only 1 of them.
+            Compares both lists to confirm letters guessed are the actual secreet word. 
+        """
         word_1 = sorted(guessed_letters)
         word_1 = list(set(word_1))
         word_2 = sorted(self._word_letters)
@@ -143,6 +149,8 @@ class SecretWord:
         return word_1 == word_2
 
     def display_progress(self, guessed_letters, terminal_service):
+        """This function checks if each guessed letter is part of the secret word. If so, it will display the guessed letter(s), otherwise it will display a '_'
+        """
         terminal_service.write_text("")
         for i in range(len(self._word_letters)):
             letter = self._word_letters[i]

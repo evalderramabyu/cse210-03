@@ -66,7 +66,7 @@ class Director:
         self._current_letter = self._terminal_service.read_text("Guess a letter [a-z]: ")
 
     def _do_updates(self):
-        """Keeps watch on the letters entered and lives of the player.
+        """Keeps track of the input letters and remaining lives of the user.
 
         Args:
             self (Director): An instance of Director.
