@@ -75,7 +75,15 @@ class Director:
             self._guessed_letters.append(self._current_letter)
             if self._secret_word.is_found(self._guessed_letters):
                 self._is_playing = False
-                self._terminal_service.write_text("\nYou made it!")
+                win_text = """ 
+ __   __                   __        __                  _   _   _ 
+ \ \ / /   ___    _   _    \ \      / /   ___    _ __   | | | | | |
+  \ V /   / _ \  | | | |    \ \ /\ / /   / _ \  | '_ \  | | | | | |
+   | |   | (_) | | |_| |     \ V  V /   | (_) | | | | | |_| |_| |_|
+   |_|    \___/   \__,_|      \_/\_/     \___/  |_| |_| (_) (_) (_)
+                """
+
+                self._terminal_service.write_text(win_text)
         else:
             self._parachute.lose_life()
             lifes = self._parachute.get_lifes()
