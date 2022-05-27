@@ -85,6 +85,7 @@ class Director:
                 """
 
                 self._terminal_service.write_text(win_text)
+                
         else:
             self._parachute.lose_life()
             lifes = self._parachute.get_lifes()
@@ -100,6 +101,8 @@ class Director:
                                                               \_\\
                 """
                 self._terminal_service.write_text(lost_text)
+                self._terminal_service.write_text(f"The word was:  {self._secret_word.get_word()}")
+        
 
     def _do_outputs(self):
         """Displays game progress and draw the parachute.
