@@ -89,7 +89,15 @@ class Director:
             lifes = self._parachute.get_lifes()
             if lifes == 0:
                 self._is_playing = False
-                self._terminal_service.write_text("\nYou lost. I'm sorry :(")
+                lost_text = """
+ __   __                    _                 _                __
+ \ \ / /   ___    _   _    | |   ___    ___  | |_         _   / /
+  \ V /   / _ \  | | | |   | |  / _ \  / __| | __|       (_) | | 
+   | |   | (_) | | |_| |   | | | (_) | \__ \ | |_         _  | | 
+   |_|    \___/   \__,_|   |_|  \___/  |___/  \__|       (_) | | 
+                                                              \_\
+                """
+                self._terminal_service.write_text(lost_text)
 
     def _do_outputs(self):
         """Displays game progress and draw the parachute.
