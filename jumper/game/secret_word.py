@@ -127,6 +127,7 @@ class SecretWord:
         self._word = secret_word[0]
         self._word_letters = list(secret_word[0])
 
+        #Print rules and hints
         terminal_service.write_text(f"This emoji is your hint: {secret_word[1]}")
         terminal_service.write_text(f"The word has {len(secret_word[0])} letters")
         terminal_service.write_text("You have 4 lives")
