@@ -1,12 +1,12 @@
 class Parachute:
-    
+
     def __init__(self):
         """
         Attributes
             _lives: integer
         """
         self._lives = 4
-        
+
     def lose_life(self):
         """
         Takes a live away from the remaining lives of the game

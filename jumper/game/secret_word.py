@@ -41,8 +41,6 @@ class SecretWord:
             ("cake", "🕯️​​"),
             ("city", "🌉​​"),
         ]
-        
-       
 
         return random.choice(list_words)
 
@@ -58,15 +56,15 @@ class SecretWord:
         """
 
         list_words = [
-            ("author","✍️​"), 
+            ("author","✍️​"),
             ("adventure","🗺️​"),
-            ("design","🖊️​"), 
+            ("design","🖊️​"),
             ("unique","💎​"),
-            ("create","🎨​"), 
-            ("celebrate","🎆​"), 
-            ("theory","🎩​"), 
-            ("vision","👓​"), 
-            ("relax","🏖️​"), 
+            ("create","🎨​"),
+            ("celebrate","🎆​"),
+            ("theory","🎩​"),
+            ("vision","👓​"),
+            ("relax","🏖️​"),
             ("flexible","🦿​"),
         ]
 
@@ -85,16 +83,17 @@ class SecretWord:
 
         list_words = [
             ("indubitable","🤔​"),
-            ("propitious","⛈️​"), 
-            ("reciprocate","🤝​"), 
+            ("propitious","⛈️​"),
+            ("reciprocate","🤝​"),
             ("infallible","🔮​"),
-            ("jeopardize","♟️​"), 
-            ("antiquated","🧝​"), 
-            ("quotidian","🗞️ ⏰​​"), 
-            ("hazardous","🎲​"), 
-            ("impeccable","💅🤵​​"), 
+            ("jeopardize","♟️​"),
+            ("antiquated","🧝​"),
+            ("quotidian","🗞️ ⏰​​"),
+            ("hazardous","🎲​"),
+            ("impeccable","💅🤵​​"),
             ("syllogism","💭🧠​​")
         ]
+
         return random.choice(list_words)
 
     def input_word(self, terminal_service):
@@ -105,10 +104,9 @@ class SecretWord:
                 self (SecretWord): An instance of SecretWord.
         """
 
-        word_level = random.randint(1, 3)  # 1 for basic word
-        
-        # 2 for intermediate word
-        # 3 for advanced word
+        word_level = random.randint(1, 3)   # 1 for basic word
+                                            # 2 for intermediate word
+                                            # 3 for advanced word
         secret_word = ''
 
         if word_level == 1:
@@ -128,18 +126,24 @@ class SecretWord:
 
         self._word = secret_word[0]
         self._word_letters = list(secret_word[0])
-        #prints rules and hints
-        print(f"This emoji is your hint: {secret_word[1]}")
-        print(f"The word has {len(secret_word[0])} letters")
-        print("You have 4 lives")
+
+        #Print rules and hints
+        terminal_service.write_text(f"This emoji is your hint: {secret_word[1]}")
+        terminal_service.write_text(f"The word has {len(secret_word[0])} letters")
+        terminal_service.write_text("You have 4 lives")
 
     def check_letter(self, letter):
         return letter in self._word_letters
 
     def is_found(self, guessed_letters):
-        return sorted(guessed_letters) == sorted(self._word_letters)
+        word_1 = sorted(guessed_letters)
+        word_1 = list(set(word_1))
+        word_2 = sorted(self._word_letters)
+        word_2 = list(set(word_2))
+        return word_1 == word_2
 
     def display_progress(self, guessed_letters, terminal_service):
+        terminal_service.write_text("")
         for i in range(len(self._word_letters)):
             letter = self._word_letters[i]
             if letter in guessed_letters:

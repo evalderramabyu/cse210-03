@@ -75,8 +75,9 @@ class Director:
             self._guessed_letters.append(self._current_letter)
             if self._secret_word.is_found(self._guessed_letters):
                 self._is_playing = False
-                win_text = """ 
- __   __                   __        __                  _   _   _ 
+                self._do_outputs()
+                win_text = """
+ __   __                   __        __                  _   _   _
  \ \ / /   ___    _   _    \ \      / /   ___    _ __   | | | | | |
   \ V /   / _ \  | | | |    \ \ /\ / /   / _ \  | '_ \  | | | | | |
    | |   | (_) | | |_| |     \ V  V /   | (_) | | | | | |_| |_| |_|
@@ -90,13 +91,14 @@ class Director:
             lifes = self._parachute.get_lifes()
             if lifes == 0:
                 self._is_playing = False
+                self._do_outputs()
                 lost_text = """
  __   __                    _                 _                __
  \ \ / /   ___    _   _    | |   ___    ___  | |_         _   / /
-  \ V /   / _ \  | | | |   | |  / _ \  / __| | __|       (_) | | 
-   | |   | (_) | | |_| |   | | | (_) | \__ \ | |_         _  | | 
-   |_|    \___/   \__,_|   |_|  \___/  |___/  \__|       (_) | | 
-                                                              \_\
+  \ V /   / _ \  | | | |   | |  / _ \  / __| | __|       (_) | |
+   | |   | (_) | | |_| |   | | | (_) | \__ \ | |_         _  | |
+   |_|    \___/   \__,_|   |_|  \___/  |___/  \__|       (_) | |
+                                                              \_\\
                 """
                 self._terminal_service.write_text(lost_text)
                 self._terminal_service.write_text(f"The word was:  {self._secret_word.get_word()}")
