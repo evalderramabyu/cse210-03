@@ -11,10 +11,13 @@ class SecretWord:
             self (Jumper): An instance of Jumper.
         """
         self._word = ''
-        self._letter = ''
         self._word_letters = []
-        self._word_level = ''
-        self._terminal_service = TerminalService()
+
+    def get_word(self):
+        return self._word
+
+    def get_word_letters(self):
+        return self._word_letters
 
     def _basic_level(self):
         """
@@ -23,14 +26,13 @@ class SecretWord:
             Args:
                 self (SecretWord): An instance of SecretWord.
 
-            Returns: 
-                self._word: The random word
+            Returns:
+                string: A random word.
         """
 
         list_words = ['feel', 'glad', 'down', 'time',
                       'duck', 'long', 'part', 'fast', 'cake', 'city']
-        self._word = random.choice(list_words)
-        return self._word
+        return random.choice(list_words)
 
     def _intermediate_level(self):
         """
@@ -39,14 +41,13 @@ class SecretWord:
             Args:
                 self (SecretWord): An instance of SecretWord.
 
-            Returns: 
-                self._word: The random word
+            Returns:
+                string: A random word.
         """
 
         list_words = ['author', 'century', 'design', 'unique',
                       'create', 'debate', 'theory', 'vision', 'relax', 'flexible']
-        self._word = random.choice(list_words)
-        return self._word
+        return random.choice(list_words)
 
     def _advanced_level(self):
         """
@@ -55,83 +56,56 @@ class SecretWord:
             Args:
                 self (SecretWord): An instance of SecretWord.
 
-            Returns: 
-                self._word: The random word
+            Returns:
+                string: A random word.
         """
 
         list_words = ['indubitable', 'propitious', 'reciprocate', 'infallible',
                       'jeopardize', 'antiquated', 'quotidian', 'hazardous', 'impeccable', 'syllogism']
-        self._word = random.choice(list_words)
-        return self._word
+        return random.choice(list_words)
 
-    def _empty_word(self, number):
+    def input_word(self, terminal_service):
         """
-            Create lines depending the number of letter in the random word
+            Select a random
 
             Args:
                 self (SecretWord): An instance of SecretWord.
-
-            Returns: 
-                self._word_letters: The word like lines
-
         """
 
-        for i in range(number):
-            self._word_letters.append('_')
-        return self._word_letters
+        word_level = random.randint(1, 3)  # 1 for basic word
+        # 2 for intermediate word
+        # 3 for advanced word
+        secret_word = ''
 
-    def input_word(self):
-        """
-            Select a random 
+        if word_level == 1:
+            terminal_service.write_text(
+                'This is your lucky day, your word is very easy to guess 👏 \n')
+            secret_word = self._basic_level()
 
-            Args:
-                self (SecretWord): An instance of SecretWord.
-
-            Returns: 
-                self._word: The random word (basic, intermediate or advanced)
-                self._word_level:   1 for basic word
-                                    2 for intermediate word
-                                    3 for advanced word
-        """
-
-        self._word_level = random.randint(1, 3)
-
-        if self._word_level == 1:
-            self._terminal_service.write_text(
-                'This is your lucky day, your word is very easy to guess 👏')
-            self._word = self._basic_level()
-
-        elif self._word_level == 2:
-            self._terminal_service.write_text(
-                'You can guess this work, only think a little bit 👍')
-            self._word = self._intermediate_level()
+        elif word_level == 2:
+            terminal_service.write_text(
+                'You can guess this work, only think a little bit 👍 \n')
+            secret_word = self._intermediate_level()
 
         else:
-            self._terminal_service.write_text(
-                'This word is very difficult. Do you really think you can guess it? 😏')
-            self._word = self._advanced_level()
+            terminal_service.write_text(
+                'This word is very difficult. Do you really think you can guess it? 😏 \n')
+            secret_word = self._advanced_level()
 
-        self._word_letters = self._empty_word(len(self._word))
+        self._word = secret_word
+        self._word_letters = list(secret_word)
 
-        return self._word, self._word_letters
+    def check_letter(self, letter):
+        return letter in self._word_letters
 
-    def check_letter(self, random_word, selected_letter, lines):
-        found_letter = 'no'
-        for i in range(len(random_word)):
-            if random_word[i] == selected_letter:
-                lines[i] = selected_letter
-                found_letter = 'yes'
-        return found_letter
+    def is_found(self, guessed_letters):
+        return sorted(guessed_letters) == sorted(self._word_letters)
 
-    def if_found(self, lines):
-        found = 'yes'
-        for i in range(len(lines)):
-            if lines[i] == '_':
-                found = 'no'
-        return found
-
-    def display_progress(self, lines):
-        print('⚕️', end=' ')
-        for i in range(len(lines)):
-            print(f' {lines[i]}', end=' ')
-        print('\n❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️❄️\n')
+    def display_progress(self, guessed_letters, terminal_service):
+        for i in range(len(self._word_letters)):
+            letter = self._word_letters[i]
+            if letter in guessed_letters:
+                print(f' {letter} ', end=' ')
+            else:
+                print('_ ', end=' ')
+        terminal_service.write_text("")
