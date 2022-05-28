@@ -88,8 +88,8 @@ class Director:
                 
         else:
             self._parachute.lose_life()
-            lifes = self._parachute.get_lifes()
-            if lifes == 0:
+            lives = self._parachute.get_lives()
+            if lives == 0:
                 self._is_playing = False
                 self._do_outputs()
                 lost_text = """
