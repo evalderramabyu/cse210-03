@@ -13,7 +13,7 @@ class Parachute:
         """
         self._lives -= 1
 
-    def get_lifes(self):
+    def get_lives(self):
         """
         Gets the remaining lives in the game.
         """
